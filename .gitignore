@@ -2,7 +2,3 @@
 __pycache__
 .pylint.d
 .vscode
-README.txt
-dataset/real_images
-dl-env
-dataset
