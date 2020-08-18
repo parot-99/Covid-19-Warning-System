@@ -6,11 +6,19 @@ A simple classifier that can detect whether if a person is wearing a face-mask o
 
  1. python 3.7 >=
  2. pip
- 3. a requirements file include all the packages needed that can be installed using pip
+
+## Clone Repository
+
+The repository contains the trained network saved as HDF5 file, the file size is big, so it 
+was uploaded using github lfs.
+
+To clone the repository use the command:
+
+    git lfs clone
 
 ## Install requirements 
 
-To install all the packages needed use the following command:
+To install all the packages needed use command:
 
     pip install -r requirments.txt
 
