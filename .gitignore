@@ -2,3 +2,4 @@
 __pycache__
 .pylint.d
 .vscode
+.gitattributes
