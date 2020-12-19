@@ -24,7 +24,7 @@ Check [GPU support | Tensorflow] for GPU support.
 
 
 1. Clone the repository 
-2. (Optional) Create a virtual enviroment using:
+2. (Optional) Create a virtual enviroment:
     ```shell
     python -m venv mask-detector-env
     ```
@@ -40,7 +40,7 @@ Check [GPU support | Tensorflow] for GPU support.
     || PowerShell | PS C:\> <venv>\Scripts\Activate.ps1
 
 
-3. Install requirments using:
+3. Install requirments:
 
     ```shell
     pip install -r requirements.txt
@@ -53,7 +53,7 @@ Check [GPU support | Tensorflow] for GPU support.
 
 ## Interface
 
-After running detector\.py enter the path for the weights directory you wish to use (dowload weights from weights section)  then a simple interface will be used for running detections:
+After running detector\.py enter the path for the weights directory you wish to use (dowload weights from weights section):
 
 1. Choose options 1, 2, and 3 for detecting from image, video or cam.
 2. Choose options 4 to 9 to change the configurations of the detector (See next section for explaination about the configurations)
@@ -72,8 +72,8 @@ After running detector\.py enter the path for the weights directory you wish to 
 
 ## TODO
 
-* [ ] Train YOLOv4 and add weights
-* [ ] Create a simple GUI
+* [ ] Train YOLOv4 and add weights.
+* [ ] Build a simple GUI.
 * [ ] Social distancing violation detection.
 
 ## References
