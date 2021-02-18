@@ -63,11 +63,11 @@ After running detector\.py enter the path for the weights directory you wish to 
 
 ## Configurations
 
-1. show masks: Set true to highlight masks.
+1. show masks: set true to highlight masks.
 2. show FPS: set true to show video FPS.
-3. show scores: set true to see the score of each detection.
+3. show scores: set true to show the score of each detection.
 4. write detection: set true to save image/video after detecting.
-5. score threshold: set the score threshold of more accurate detections. 
+5. score threshold: change score threshold. 
 6. IOU threshold: set IOU threshold for non maximum suppression (better leave the default)
 
 ## TODO
