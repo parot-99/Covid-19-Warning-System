@@ -27,7 +27,7 @@ class YoloMask:
         self.__detect_frame(frame)
 
         if self.__write_detection:
-            cv2.imwrite('results.jpg', frame)
+            cv2.imwrite('prediction.jpg', frame)
 
         cv2.imshow('Image', frame)
         cv2.waitKey(0)
@@ -40,7 +40,7 @@ class YoloMask:
             height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
             fps = int(cap.get(cv2.CAP_PROP_FPS))
             output = cv2.VideoWriter(
-                filename='output.avi',
+                filename='prediction.avi',
                 apiPreference=cv2.CAP_ANY,
                 fourcc=cv2.VideoWriter_fourcc('M','J','P','G'),
                 fps=fps,
@@ -90,8 +90,8 @@ class YoloMask:
                     pred_conf,
                     (tf.shape(pred_conf)[0], -1, tf.shape(pred_conf)[-1])
                 ),
-                max_output_size_per_class=50,
-                max_total_size=50,
+                max_output_size_per_class=1000,
+                max_total_size=2000,
                 iou_threshold=self.__iou_threshold,
                 score_threshold=self.__score_threshold
             )
