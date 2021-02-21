@@ -12,8 +12,13 @@ Simple interface for detecting people with/without face masks using YOLOv4 and Y
 
 ## Prerequisites
 
- 1. python 3.6 >= and < 3.9
- 2. pip
+ 1. Python 3.5–3.8
+ 2. pip 19.0 or later
+   
+
+## Note
+The requirements are updated acording to which version of tensorflow the repository was lately tested on.
+Feel free to use Tensorflow 2.2-2.4
 
 
 ## Usage
@@ -21,9 +26,8 @@ Simple interface for detecting people with/without face masks using YOLOv4 and Y
 0. Note: It is highly recommended to use a GPU because YOLO is a very big network that runs poorly on CPU.
 Check [GPU support | Tensorflow] for GPU support.
 
-
-
 1. Clone the repository 
+
 2. (Optional) Create a virtual enviroment:
     ```shell
     python -m venv mask-detector-env
