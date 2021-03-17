@@ -91,7 +91,7 @@ Datasets:
 * #### [Face Mask Detection Dataset]
 
 # License
-[MIT Licensed]
+[BSD 3-Clause License]
 
 <!-- Links -->
 [YOLOv4 paper]: <https://arxiv.org/abs/2004.10934>
@@ -102,4 +102,4 @@ Datasets:
 [Face Mask Dataset (YOLO Format)]: <https://www.kaggle.com/aditya276/face-mask-dataset-yolo-format>
 [Face Mask Detection Dataset]: <https://www.kaggle.com/wobotintelligence/face-mask-detection-dataset>
 [YOLOv4-tiny]: <https://drive.google.com/uc?export=download&id=1Rw5CCOxRK52-nFLWKKBAxvKeniJxOr7z>
-[MIT Licensed]: <https://github.com/parot-99/Covid-19-Warning-System/blob/master/LICENSE>
+[BSD 3-Clause License]: <https://github.com/parot-99/Covid-19-Warning-System/blob/master/LICENSE>
