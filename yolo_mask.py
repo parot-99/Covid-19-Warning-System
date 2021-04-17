@@ -8,9 +8,9 @@ from tensorflow.keras.models import load_model
 class YoloMask:
     def __init__(self, detector_path):
         self.__class_names = {0: 'no-mask', 1: 'mask'}
-        self.__show_masks = False
-        self.__show_fps = False
-        self.__show_scores = False
+        self.__show_masks = True
+        self.__show_fps = True
+        self.__show_scores = True
         self.__write_detection = False
         self.__score_threshold = 0.3
         self.__iou_threshold = 0.45
@@ -30,7 +30,10 @@ class YoloMask:
             cv2.imwrite('prediction.jpg', frame)
 
         cv2.imshow('Image', frame)
-        cv2.waitKey(0)
+        key = cv2.waitKey(0)
+        
+        if key == ord('q'):
+            cv2.destroyAllWindows()
 
     def detect_from_video(self, src=0):
         cap = cv2.VideoCapture(src, cv2.CAP_ANY)
