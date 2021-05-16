@@ -1,30 +1,26 @@
 # Covid-19 Warning System
 
-Simple interface for detecting people with/without face masks using YOLOv4 and YOLOv4 Tiny.
-
+A deep learning based system that can:  
+* Detect people not wearing face masks, mark them, and count the number of violations. 
+* Detect social distancing violations, mark them, and count the number of violations.
 
 ## Weights
-
-#### [YOLOv4-tiny]
-#### YOLOv4 (in progress)
-
-
+* yolov4-mask (in progress) -> mask detection
+* [yolov4-tiny-mask] -> mask detection
+* yolov4 (in progress) -> social distancing detection
+* yolov4-tiny (in progress) -> social distancing detection
 
 ## Prerequisites
-
  1. Python 3.5–3.8
  2. pip 19.0 or later
    
-
 ## Note
-The requirements are updated acording to which version of tensorflow the repository was lately tested on.
-Feel free to use Tensorflow 2.2-2.4
+    The requirements are updated acording to which version of tensorflow the repository was lately tested on.
+    Feel free to use Tensorflow 2.2-2.4
 
 
-## Usage
-
-0. Note: It is highly recommended to use a GPU because YOLO is a very big network that runs poorly on CPU.
-Check [GPU support | Tensorflow] for GPU support.
+## Installation
+1. Note: For best performance, enable GPU for tensorflow. Check [GPU support | Tensorflow] for GPU support.
 
 1. Clone the repository 
 
@@ -43,52 +39,84 @@ Check [GPU support | Tensorflow] for GPU support.
     Windows | cmd.exe | C:\> <venv>\Scripts\activate.bat
     || PowerShell | PS C:\> <venv>\Scripts\Activate.ps1
 
-
 3. Install requirments:
 
     ```shell
     pip install -r requirements.txt
     ```
 
-4. Run the detector interface:
+4. Download weights to be used from weights section
+   * yolov4-mask or yolov4-tiny-mask for mask detection
+   * yolov4 or yolov4-tiny for social distancing detection 
+
+## Usage
+* View arguments
     ```shell
-    python detector.py
+    python detector.py -h
     ```
-
-## Interface
-
-After running detector\.py enter the path for the weights directory you wish to use (dowload weights from weights section):
-
-1. Choose options 1, 2, and 3 for detecting from image, video or cam.
-2. Choose options 4 to 9 to change the configurations of the detector (See next section for explaination about the configurations)
-3. Choose 10 to see the values of the current configuration.
-4. Choose 11 to exit.
-
-
-## Configurations
-
-1. show masks: set true to highlight masks.
-2. show FPS: set true to show video FPS.
-3. show scores: set true to show the score of each detection.
-4. write detection: set true to save image/video after detecting.
-5. score threshold: change score threshold. 
-6. IOU threshold: set IOU threshold for non maximum suppression (better leave the default)
+* Detect mask from image
+     ```shell
+    python detector.py detect mask ./image_path.jpg
+    ```
+* Detect mask from cam
+     ```shell
+    python detector.py cam mask cam_source
+    ```
+* Detect mask from video
+     ```shell
+    python detector.py demo mask ./video_path.mp4
+    ```
+<!-- * Detect social distancing from video
+     ```shell
+    python detector.py detect mask ./image_path.jpg
+    ``` -->
+## Config.json
+    showMasks: set true to highlight masks in mask detection
+    showFPS: set true to log FPS
+    showScores": set true to show the score for each bounding box
+    writeDetection": set true to save results
+    scoreThreshold": score threshold (from 0.0 two 1.0)
+    iouThreshold": IOU threshold (from 0.0 two 1.0)
+    detectorPath": path to the detector to be used 
+    videoOutputPath": path to save video results
+    imageOutputPath": path to save image results
 
 ## TODO
 
-* [ ] Train YOLOv4 and add weights.
-* [ ] Build a simple GUI.
-* [ ] Social distancing violation detection.
+* [ ] Train yolov4-mask and add weights
+* [ ] Social distancing detection
+* [ ] Add yolov4 weights
+* [ ] Add yolov4-tiny weights
+* [ ] Build a simple GUI
+
+## Dataset
+    We collected images from multiple sources (mentioned is the Acknowledgements section), removed images that may lead to an unwanted results, added new images for better results, and labeled all the images.
+
+    The new [mask-dataset] used to train the face mask detector.
+
+## Tech Stack
+* Python
+* tensorflow
+* Opencv
+* Numpy
+* YOLO (Darknet framework)
 
 ## References
-#### [YOLOv4 paper]
-#### [YOLOv4 Source Code]
-#### [YOLOv3 paper]
-#### [tensorflow-yolov4-tflite] for converting darknet wieghts to tensorflow pb.
+* [YOLOv4 paper]
+* [YOLOv4 Source Code]
+* [YOLOv3 paper]
+* [tensorflow-yolov4-tflite] for converting darknet wieghts to tensorflow pb.
 
-Datasets:
-* #### [Face Mask Dataset (YOLO Format)]
-* #### [Face Mask Detection Dataset]
+## Acknowledgements:
+* Dataset
+  * [Face Mask Dataset (YOLO Format)]
+  * [Face Mask Detection Dataset]
+  * [WIDER FACE]
+  * [Google] Search Engine
+
+## Authors
+* [Ahmed Abdulkader]
+* [M.Farok Mohammed]
 
 # License
 [BSD 3-Clause License]
@@ -101,5 +129,13 @@ Datasets:
 [GPU support | Tensorflow]: <https://www.tensorflow.org/install/gpu>
 [Face Mask Dataset (YOLO Format)]: <https://www.kaggle.com/aditya276/face-mask-dataset-yolo-format>
 [Face Mask Detection Dataset]: <https://www.kaggle.com/wobotintelligence/face-mask-detection-dataset>
-[YOLOv4-tiny]: <https://drive.google.com/uc?export=download&id=1Rw5CCOxRK52-nFLWKKBAxvKeniJxOr7z>
+[WIDER FACE]: <http://shuoyang1213.me/WIDERFACE/>
+[Google]: <https://www.google.com/>
+[yolov4-mask]: <>
+[yolov4-tiny-mask]: <https://drive.google.com/uc?export=download&id=1Rw5CCOxRK52-nFLWKKBAxvKeniJxOr7z>
+[yolov4]: <>
+[yolov4-tiny]: <>
 [BSD 3-Clause License]: <https://github.com/parot-99/Covid-19-Warning-System/blob/master/LICENSE>
+[mask-dataset]: <https://drive.google.com/uc?export=download&id=1z4xdhhTcGHx3bDmbdc2dc-MffZKZSNdd>
+[Ahmed Abdulkader]: <https://github.com/parot-99>
+[M.Farok Mohammed]: <https://github.com/farok-amo>

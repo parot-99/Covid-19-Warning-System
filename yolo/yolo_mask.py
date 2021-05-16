@@ -3,18 +3,26 @@ import cv2
 import numpy as np
 import tensorflow as tf
 from tensorflow.keras.models import load_model
+import json
 
+
+with open('config.json', 'r') as file:
+    config = json.load(file)
+    
 
 class YoloMask:
-    def __init__(self, detector_path):
+    def __init__(self):
         self.__class_names = {0: 'no-mask', 1: 'mask'}
-        self.__show_masks = True
-        self.__show_fps = True
-        self.__show_scores = True
-        self.__write_detection = False
-        self.__score_threshold = 0.3
-        self.__iou_threshold = 0.45
-        loaded_detector = load_model(detector_path, compile=False)
+        self.__show_masks = config['showMasks']
+        self.__show_fps = config['showFPS']
+        self.__show_scores = config['showScores']
+        self.__score_threshold = config['scoreThreshold']
+        self.__iou_threshold = config['iouThreshold']
+        self.__write_detection = config['writeDetection']
+        loaded_detector = load_model(
+            config['detectorPath'],
+            compile=False
+        )
         self.mask_detector = loaded_detector.signatures['serving_default']
 
     def detect_from_image(self, image_path):
@@ -196,52 +204,3 @@ class YoloMask:
             (0, 0, 255),
             3
         )
-
-    @property
-    def show_masks(self):
-        return self.__show_masks
-
-    @property
-    def show_fps(self):
-        return self.__show_fps
-
-    @property
-    def show_scores(self):
-        return self.__show_scores
-
-    @property
-    def write_detection(self):
-        return self.__write_detection
-
-    @property
-    def score_threshold(self):
-        return self.__score_threshold
-
-    @property
-    def iou_threshold(self):
-        return self.__iou_threshold
-
-    @show_masks.setter
-    def show_masks(self, show_masks):
-        self.__show_masks = show_masks
-
-    @show_fps.setter
-    def show_fps(self, show_fps):
-        self.__show_fps = show_fps
-
-    @show_scores.setter
-    def show_scores(self, show_scores):
-        self.__show_scores = show_scores
-
-    @write_detection.setter
-    def write_detection(self, write_detection):
-        self.__write_detection = write_detection
-
-    @score_threshold.setter
-    def score_threshold(self, score_threshold):
-        self.__score_threshold = score_threshold
-
-    @iou_threshold.setter
-    def iou_threshold(self, iou_threshold):
-        self.__iou_threshold = iou_threshold
-
