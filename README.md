@@ -15,8 +15,8 @@ A deep learning based system that can:
  2. pip 19.0 or later
    
 ## Note
-    The requirements are updated acording to which version of tensorflow the repository was lately tested on.
-    Feel free to use Tensorflow 2.2-2.4
+The requirements are updated acording to which version of tensorflow the repository was lately tested on.
+Feel free to use Tensorflow 2.2-2.4
 
 
 ## Installation
@@ -71,15 +71,15 @@ A deep learning based system that can:
     python detector.py detect mask ./image_path.jpg
     ``` -->
 ## Config.json
-    showMasks: set true to highlight masks in mask detection
-    showFPS: set true to log FPS
-    showScores": set true to show the score for each bounding box
-    writeDetection": set true to save results
-    scoreThreshold": score threshold (from 0.0 two 1.0)
-    iouThreshold": IOU threshold (from 0.0 two 1.0)
-    detectorPath": path to the detector to be used 
-    videoOutputPath": path to save video results
-    imageOutputPath": path to save image results
+showMasks: set true to highlight masks in mask detection
+showFPS: set true to log FPS
+showScores": set true to show the score for each bounding box
+writeDetection": set true to save results
+scoreThreshold": score threshold (from 0.0 two 1.0)
+iouThreshold": IOU threshold (from 0.0 two 1.0)
+detectorPath": path to the detector to be used 
+videoOutputPath": path to save video results
+imageOutputPath": path to save image results
 
 ## TODO
 
@@ -90,9 +90,9 @@ A deep learning based system that can:
 * [ ] Build a simple GUI
 
 ## Dataset
-    We collected images from multiple sources (mentioned is the Acknowledgements section), removed images that may lead to an unwanted results, added new images for better results, and labeled all the images.
+We collected images from multiple sources (mentioned is the Acknowledgements section), removed images that may lead to an unwanted results, added new images for better results, and labeled all the images.
 
-    The new [mask-dataset] used to train the face mask detector.
+The new [mask-dataset] used to train the face mask detector.
 
 ## Tech Stack
 * Python
