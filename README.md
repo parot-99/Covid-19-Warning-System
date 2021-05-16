@@ -71,15 +71,15 @@ Feel free to use Tensorflow 2.2-2.4
     python detector.py detect mask ./image_path.jpg
     ``` -->
 ## Config.json
-showMasks: set true to highlight masks in mask detection  
-showFPS: set true to log FPS  
-showScores": set true to show the score for each bounding box  
-writeDetection": set true to save results  
-scoreThreshold": score threshold (from 0.0 two 1.0)  
-iouThreshold": IOU threshold (from 0.0 two 1.0)  
-detectorPath": path to the detector to be used   
-videoOutputPath": path to save video results  
-imageOutputPath": path to save image results  
+* showMasks: set true to highlight masks in mask detection
+* showFPS: set true to log FPS
+* showScores: set true to show the score for each bounding box
+* writeDetection: set true to save results
+* scoreThreshold: score threshold (from 0.0 two 1.0) 
+* iouThreshold: IOU threshold (from 0.0 two 1.0)
+* detectorPath: path to the detector to be used
+* videoOutputPath: path to save video results
+* imageOutputPath: path to save image results
 
 ## TODO
 
