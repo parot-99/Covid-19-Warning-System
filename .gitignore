@@ -5,3 +5,5 @@ __pycache__
 .gitattributes
 prediction.jpg
 test.jpg
+weights/*
+yolo_social_distance.py

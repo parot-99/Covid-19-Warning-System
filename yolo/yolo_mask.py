@@ -58,28 +58,32 @@ class YoloMask:
                 frameSize=(width, height)
             )
 
-        try:
-            while cap.isOpened():
-                prev_time = time.time()
-                retval, frame = cap.read(0)
-                self.__detect_frame(frame)
+        while True:
+            prev_time = time.time()
+            retval, frame = cap.read(0)
+
+            if not retval:
+                print("Can't receive frame (stream end?). Exiting ...")
+                break
                 
-                if !config['dontShow']
-                    cv2.imshow('Frame', frame)
+            self.__detect_frame(frame)
 
-                if self.__write_detection:
-                    output.write(frame)
+            if not config['dontShow']:
+                cv2.imshow('Frame', frame)
 
-                if self.__show_fps:
-                    fps = int(1/(time.time() - prev_time))
-                    print("FPS: {}".format(fps))
+            if self.__write_detection:
+                output.write(frame)
 
-                if cv2.waitKey(1) & 0xff == ord('q'):
-                    break
+            if self.__show_fps:
+                fps = int(1/(time.time() - prev_time))
+                print("FPS: {}".format(fps))
 
-        finally:
-            cap.release()
-            cv2.destroyAllWindows()
+            if cv2.waitKey(1) & 0xff == ord('q'):
+                break
+
+        cap.release()
+        cv2.destroyAllWindows()
+
 
     def __detect_frame(self, frame):
         image_data = frame.copy()
