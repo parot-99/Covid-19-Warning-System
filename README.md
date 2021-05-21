@@ -132,7 +132,7 @@ The new [mask-dataset] used to train the face mask detector.
 [WIDER FACE]: <http://shuoyang1213.me/WIDERFACE/>
 [Google]: <https://www.google.com/>
 [yolov4-mask]: <>
-[yolov4-tiny-mask]: <https://drive.google.com/uc?export=download&id=1Rw5CCOxRK52-nFLWKKBAxvKeniJxOr7z>
+[yolov4-tiny-mask]: <https://drive.google.com/uc?export=download&id=16hf63XeHeoldj7SC_MvgYV1syIgip69t>
 [yolov4]: <>
 [yolov4-tiny]: <>
 [BSD 3-Clause License]: <https://github.com/parot-99/Covid-19-Warning-System/blob/master/LICENSE>

@@ -5,6 +5,7 @@
     "writeDetection": false,
     "scoreThreshold": 0.3,
     "iouThreshold": 0.45,
+    "dontShow": true,
     "detectorPath": "./weights/yolov4-tiny-mask",
     "videoOutputPath": "./result.mp4",
     "imageOutputPath": "./result.jpg"

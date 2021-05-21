@@ -63,7 +63,9 @@ class YoloMask:
                 prev_time = time.time()
                 retval, frame = cap.read(0)
                 self.__detect_frame(frame)
-                cv2.imshow('Frame', frame)
+                
+                if !config['dontShow']
+                    cv2.imshow('Frame', frame)
 
                 if self.__write_detection:
                     output.write(frame)
