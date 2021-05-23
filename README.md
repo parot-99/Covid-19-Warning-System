@@ -75,9 +75,9 @@ Feel free to use Tensorflow 2.2-2.4
 * showFPS: set true to log FPS
 * showScores: set true to show the score for each bounding box
 * writeDetection: set true to save results
-* dontShow: set true yo hide video while parsing it
-* scoreThreshold: score threshold (from 0.0 two 1.0) 
-* iouThreshold: IOU threshold (from 0.0 two 1.0)
+* dontShow: set true to hide video while parsing it
+* scoreThreshold: score threshold (from 0.0 to 1.0) 
+* iouThreshold: IOU threshold (from 0.0 to 1.0)
 * detectorPath: path to the detector to be used
 * videoOutputPath: path to save video results
 * imageOutputPath: path to save image results
@@ -92,7 +92,7 @@ Feel free to use Tensorflow 2.2-2.4
 * [ ] Build a simple GUI
 
 ## Dataset
-We collected images from multiple sources (mentioned is the Acknowledgements section), removed images that may lead to an unwanted results, added new images for better results, and labeled all the images.
+We collected images from multiple sources (mentioned in the Acknowledgements section), removed images that may lead to unwanted results, added new images for better results, and labeled all the images.
 
 The new [mask-dataset] used to train the face mask detector.
 
@@ -101,13 +101,12 @@ The new [mask-dataset] used to train the face mask detector.
 * tensorflow
 * Opencv
 * Numpy
-* YOLO (Darknet framework)
+* Darknet
 
 ## References
 * [YOLOv4 paper]
 * [YOLOv4 Source Code]
 * [YOLOv3 paper]
-* [tensorflow-yolov4-tflite] for converting darknet wieghts to tensorflow pb.
 
 ## Acknowledgements:
 * Dataset
@@ -115,6 +114,7 @@ The new [mask-dataset] used to train the face mask detector.
   * [Face Mask Detection Dataset]
   * [WIDER FACE]
   * [Google] Search Engine
+* [tensorflow-yolov4-tflite] for converting darknet wieghts to tensorflow pb.
 
 ## Authors
 * [Ahmed Abdulkader]
