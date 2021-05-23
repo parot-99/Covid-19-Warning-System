@@ -3,9 +3,9 @@
     "showFPS": true,
     "showScores": true,
     "writeDetection": false,
+    "dontShow": false,
     "scoreThreshold": 0.3,
     "iouThreshold": 0.45,
-    "dontShow": false,
     "detectorPath": "./weights/yolov4-tiny-mask",
     "videoOutputPath": "./result.mp4",
     "imageOutputPath": "./result.jpg"

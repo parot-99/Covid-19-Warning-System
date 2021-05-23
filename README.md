@@ -5,10 +5,10 @@ A deep learning based system that can:
 * Detect social distancing violations, mark them, and count the number of violations.
 
 ## Weights
-* yolov4-mask (in progress) -> mask detection
+* [yolov4-mask] -> mask detection
 * [yolov4-tiny-mask] -> mask detection
-* yolov4 (in progress) -> social distancing detection
-* yolov4-tiny (in progress) -> social distancing detection
+* [yolov4-coco] -> social distancing detection
+* [yolov4-tiny-coco] -> social distancing detection
 
 ## Prerequisites
  1. Python 3.5–3.8
@@ -84,10 +84,11 @@ Feel free to use Tensorflow 2.2-2.4
 
 ## TODO
 
-* [ ] Train yolov4-mask and add weights
+* [x] Train yolov4-mask and add weights
 * [ ] Social distancing detection
-* [ ] Add yolov4 weights
-* [ ] Add yolov4-tiny weights
+* [x] Add yolov4-coco weights
+* [x] Add yolov4-tiny-coco weights
+* [ ] Implement bird-eye view for social distancing detection
 * [ ] Build a simple GUI
 
 ## Dataset
@@ -132,10 +133,10 @@ The new [mask-dataset] used to train the face mask detector.
 [Face Mask Detection Dataset]: <https://www.kaggle.com/wobotintelligence/face-mask-detection-dataset>
 [WIDER FACE]: <http://shuoyang1213.me/WIDERFACE/>
 [Google]: <https://www.google.com/>
-[yolov4-mask]: <>
+[yolov4-mask]: <https://drive.google.com/uc?export=download&id=1ixBa0-wKbYbLKkaBAZkGGd2S2hNCrT-L>
 [yolov4-tiny-mask]: <https://drive.google.com/uc?export=download&id=16hf63XeHeoldj7SC_MvgYV1syIgip69t>
-[yolov4]: <>
-[yolov4-tiny]: <>
+[yolov4-coco]: <https://drive.google.com/uc?export=download&id=18YgZJBOIr3zjwBE8aUeuxGGmPwzzOyOp>
+[yolov4-tiny-coco]: <https://drive.google.com/uc?export=download&id=19BbTaRUHMSoDZs5-J7rXHggTYNypWbJe>
 [BSD 3-Clause License]: <https://github.com/parot-99/Covid-19-Warning-System/blob/master/LICENSE>
 [mask-dataset]: <https://drive.google.com/uc?export=download&id=1z4xdhhTcGHx3bDmbdc2dc-MffZKZSNdd>
 [Ahmed Abdulkader]: <https://github.com/parot-99>
