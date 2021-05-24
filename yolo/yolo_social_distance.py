@@ -43,14 +43,16 @@ class YoloSocialDistance:
         if self.__write_detection:
             cv2.imwrite('prediction.jpg', frame)
 
-        cv2.imshow('Image', frame)
-        key = cv2.waitKey(0)
+        if not config['dontShow']:
+            cv2.imshow('Image', frame)
+            key = cv2.waitKey(0)
         
-        if key == ord('q'):
-            cv2.destroyAllWindows()
+            if key == ord('q'):
+                cv2.destroyAllWindows()
 
     def detect_from_video(self, src=0):
         cap = cv2.VideoCapture(src, cv2.CAP_ANY)
+        avg_fps = []
 
         if self.__write_detection:
             width  = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
@@ -85,18 +87,24 @@ class YoloSocialDistance:
                 cv2.polylines(frame, [pts], True, (0,255,255))
                 cv2.imshow('Frame', frame)
 
-            if self.__write_detection:
-                output.write(frame)
+                if self.__write_detection:
+                    output.write(frame)
 
-            if self.__show_fps:
-                fps = int(1/(time.time() - prev_time))
-                print("FPS: {}".format(fps))
+                if self.__show_fps:
+                    fps = int(1/(time.time() - prev_time))
+                    avg_fps.append(fps)
+                    print("FPS: {}".format(fps))
 
-            if cv2.waitKey(1) & 0xff == ord('q'):
-                break
+                if cv2.waitKey(1) & 0xff == ord('q'):
+                    break
 
         cap.release()
         cv2.destroyAllWindows()
+
+        if len(avg_fps) != 0:
+            avg_fps = sum(avg_fps) / len(avg_fps)
+            print(f'[INFO]: Average FPS: {avg_fps}')
+
 
     def __detect_frame(self, frame):
         image_data = frame.copy()
@@ -409,7 +417,7 @@ class YoloSocialDistance:
                 
 
         else:
-            circles = config['birdEyeCoordinates']
+            self.__circles = config['birdEyeCoordinates']
             max_width = max(self.__circles[1][0], self.__circles[3][0])
             min_width = min(self.__circles[0][0], self.__circles[2][0])
             width = max_width - min_width
