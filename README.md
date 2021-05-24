@@ -84,11 +84,12 @@ Feel free to use Tensorflow 2.2-2.4
 
 ## TODO
 
+* [ ] Update documentation and readme
 * [x] Train yolov4-mask and add weights
-* [ ] Social distancing detection
+* [x] Social distancing detection
 * [x] Add yolov4-coco weights
 * [x] Add yolov4-tiny-coco weights
-* [ ] Implement bird-eye view for social distancing detection
+* [x] Implement bird-eye view for social distancing detection
 * [ ] Build a simple GUI
 
 ## Dataset

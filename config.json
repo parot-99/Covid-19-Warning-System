@@ -6,7 +6,16 @@
     "dontShow": false,
     "scoreThreshold": 0.3,
     "iouThreshold": 0.45,
-    "detectorPath": "./weights/yolov4-tiny-mask",
+    "detectorPath": "./weights/yolov4-tiny-coco",
     "videoOutputPath": "./result.mp4",
-    "imageOutputPath": "./result.jpg"
+    "imageOutputPath": "./result.jpg",
+    "socialDistanceFrame": "./test2_moment.jpg",
+    "pedestrianHeight": 1.8,
+    "socialDistance": 3,
+    "birdEyeCoordinates": [
+        [],
+        [],
+        [],
+        []
+    ]
 }
