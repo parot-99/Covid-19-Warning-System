@@ -19,11 +19,13 @@ class YoloMask:
         self.__score_threshold = config['scoreThreshold']
         self.__iou_threshold = config['iouThreshold']
         self.__write_detection = config['writeDetection']
+        print('[INFO]: Loading detector weights')
         loaded_detector = load_model(
             config['detectorPath'],
             compile=False
         )
         self.mask_detector = loaded_detector.signatures['serving_default']
+        print('[INFO]: Detector weights loaded')
 
     def detect_from_image(self, image_path):
         frame = cv2.imread(image_path)
@@ -73,17 +75,17 @@ class YoloMask:
             if not config['dontShow']:
                 cv2.imshow('Frame', frame)
 
-                if self.__write_detection:
-                    output.write(frame)
-
-                if self.__show_fps:
-                    fps = int(1/(time.time() - prev_time))
-                    avg_fps.append(fps)
-                    print("[INFO]: FPS: {}".format(fps))
-
                 if cv2.waitKey(1) & 0xff == ord('q'):
                     break
 
+            if self.__write_detection:
+                output.write(frame)
+
+            if self.__show_fps:
+                fps = int(1/(time.time() - prev_time))
+                avg_fps.append(fps)
+                print("[INFO]: FPS: {}".format(fps))
+                
         cap.release()
         cv2.destroyAllWindows()
 

@@ -22,11 +22,13 @@ class YoloSocialDistance:
         self.__iou_threshold = config['iouThreshold']
         self.__write_detection = config['writeDetection']
         self.__min_distance = 0
+        print('[INFO]: Loading detector weights')
         loaded_detector = load_model(
             config['detectorPath'],
             compile=False
         )
         self.detector = loaded_detector.signatures['serving_default']
+        print('[INFO]: Detector weights loaded')
         
         self.__pixel_to_meter()
         self.__get_perspecive_points()
@@ -75,28 +77,28 @@ class YoloSocialDistance:
                 break
                 
             self.__detect_frame(frame)
-
-            if not config['dontShow']:
-                pts = np.array([
+            pts = np.array([
                     self.__circles[0],
                     self.__circles[1],
                     self.__circles[3],
                     self.__circles[2]
                 ], np.int32)
-                pts = pts.reshape((-1,1,2))
-                cv2.polylines(frame, [pts], True, (0,255,255))
+            pts = pts.reshape((-1,1,2))
+            cv2.polylines(frame, [pts], True, (0,255,255))
+
+            if not config['dontShow']:            
                 cv2.imshow('Frame', frame)
-
-                if self.__write_detection:
-                    output.write(frame)
-
-                if self.__show_fps:
-                    fps = int(1/(time.time() - prev_time))
-                    avg_fps.append(fps)
-                    print("FPS: {}".format(fps))
 
                 if cv2.waitKey(1) & 0xff == ord('q'):
                     break
+
+            if self.__show_fps:
+                fps = int(1/(time.time() - prev_time))
+                avg_fps.append(fps)
+                print("FPS: {}".format(fps))
+
+            if self.__write_detection:
+                output.write(frame)
 
         cap.release()
         cv2.destroyAllWindows()
@@ -148,22 +150,28 @@ class YoloSocialDistance:
         classes_count = len(self.__class_names)
         frame_height, frame_width, _ = frame.shape
         boxes, scores, classes, box_count = bounding_boxes
+        poly = Polygon(np.array([
+            self.__circles[0],
+            self.__circles[1],
+            self.__circles[3],
+            self.__circles[2]
+        ], np.int32))
         
         violate = list()
         centroids = list()
-        
+
         for i, box in enumerate(boxes[0]):
             if i > box_count:
                 break
         
             w = (box[3] - box[1]) / 2
             h = (box[2] - box[0]) / 2
-            centroids.append((
+            centroid = (
                 (box[1] + w) * frame_width,
                 (box[0] + h) * frame_height
-            ))
+            )
+            centroids.append(centroid)
             
-        
         transformed_centroids = np.float32(centroids).reshape(-1, 1, 2)
         transformed_centroids = cv2.perspectiveTransform(
             transformed_centroids,
@@ -182,28 +190,25 @@ class YoloSocialDistance:
                 transformed_centroids, 
                 metric='euclidean'
             )
-            
+     
             for i in range(0, D.shape[0]):
                 for j in range(i + 1, D.shape[1]):
                     if D[i, j] < self.__min_distance:
-                        violate.append(i)
-                        violate.append(j)
+                        point1 = Point(centroids[i])
+                        point2 = Point(centroids[j])
+ 
+                        if poly.contains(point1) and poly.contains(point2):
+                            violate.append(i)
+                            violate.append(j)
 
         for i in range(box_count[0]):
-            class_id = int(classes[0][i])
-            
-            poly = Polygon(np.array([
-                self.__circles[0],
-                self.__circles[1],
-                self.__circles[3],
-                self.__circles[2]
-            ], np.int32))
+            class_id = int(classes[0][i])    
+            score = scores[0][i]
+
             point = Point(centroids[i])
-            
+
             if not poly.contains(point):
                 continue
-                
-            score = scores[0][i]
 
             if int(class_id < 0) or int(class_id > classes_count):
                continue
@@ -296,6 +301,7 @@ class YoloSocialDistance:
         
                
     def __pixel_to_meter(self):
+        print('[INFO]: Calculating min social distance from image')
         frame = cv2.imread(config['socialDistanceFrame'])
         image_data = frame.copy()
         image_data = cv2.cvtColor(image_data, cv2.COLOR_BGR2RGB)
@@ -410,6 +416,7 @@ class YoloSocialDistance:
                     break
             
             cv2.destroyAllWindows()
+            print('[INFO]: Bird\'s eye view corner points:')
             print(f'[INFO]: Top left corner: {self.__circles[0]}')
             print(f'[INFO]: Top right corner: {self.__circles[1]}')
             print(f'[INFO]: Bottom left corner: {self.__circles[2]}')

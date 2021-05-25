@@ -6,7 +6,7 @@
     "dontShow": false,
     "scoreThreshold": 0.3,
     "iouThreshold": 0.45,
-    "detectorPath": "./weights/yolov4-tiny-coco",
+    "detectorPath": "./weights/yolov4-mask",
     "videoOutputPath": "./result.mp4",
     "imageOutputPath": "./result.jpg",
     "socialDistanceFrame": "./test2_moment.jpg",
