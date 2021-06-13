@@ -39,7 +39,7 @@ if __name__ == '__main__':
         
     if args['system'] == 'distance':
         from yolo.yolo_social_distance import YoloSocialDistance
-        detector = YoloSocialDistance()
+        detector = YoloSocialDistance(args['tiny'])
     
     if args['source'] == 'detect':
         detector.detect_from_image(args['path'])

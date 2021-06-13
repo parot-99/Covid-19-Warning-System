@@ -71,6 +71,7 @@ Feel free to use Tensorflow 2.2-2.4
     python detector.py detect mask ./image_path.jpg
     ``` -->
 ## Config.json
+* weightsPath: path to the model weights
 * showMasks: set true to highlight masks in mask detection
 * showFPS: set true to log FPS
 * showScores: set true to show the score for each bounding box
@@ -78,7 +79,6 @@ Feel free to use Tensorflow 2.2-2.4
 * dontShow: set true to hide video while parsing it
 * scoreThreshold: score threshold (from 0.0 to 1.0) 
 * iouThreshold: IOU threshold (from 0.0 to 1.0)
-* detectorPath: path to the detector to be used
 * videoOutputPath: path to save video results
 * imageOutputPath: path to save image results
 
