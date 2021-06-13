@@ -137,10 +137,10 @@ The new [mask-dataset] used to train the face mask detector.
 [Face Mask Detection Dataset]: <https://www.kaggle.com/wobotintelligence/face-mask-detection-dataset>
 [WIDER FACE]: <http://shuoyang1213.me/WIDERFACE/>
 [Google]: <https://www.google.com/>
-[yolov4-mask]: <https://drive.google.com/uc?export=download&id=1ixBa0-wKbYbLKkaBAZkGGd2S2hNCrT-L>
-[yolov4-tiny-mask]: <https://drive.google.com/uc?export=download&id=16hf63XeHeoldj7SC_MvgYV1syIgip69t>
-[yolov4-coco]: <https://drive.google.com/uc?export=download&id=18YgZJBOIr3zjwBE8aUeuxGGmPwzzOyOp>
-[yolov4-tiny-coco]: <https://drive.google.com/uc?export=download&id=19BbTaRUHMSoDZs5-J7rXHggTYNypWbJe>
+[yolov4-mask]: <https://drive.google.com/uc?export=download&id=1Iv1Fz3X6ZKASb89g7AYQWfaLtMDEEnZw>
+[yolov4-tiny-mask]: <https://drive.google.com/uc?export=download&id=1lT_kxepZMAQkTn2TX6nx-aG78bMF3oYQ>
+[yolov4-coco]: <https://drive.google.com/uc?export=download&id=1lxljhODihjYDFp_e83l44LzTEGQmX-_o>
+[yolov4-tiny-coco]: <https://drive.google.com/uc?export=download&id=1dbbruloJpxd9nH2nOf_0r35Y5pGdTmmQ>
 [BSD 3-Clause License]: <https://github.com/parot-99/Covid-19-Warning-System/blob/master/LICENSE>
 [mask-dataset]: <https://drive.google.com/uc?export=download&id=1z4xdhhTcGHx3bDmbdc2dc-MffZKZSNdd>
 [Ahmed Abdulkader]: <https://github.com/parot-99>

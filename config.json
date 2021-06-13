@@ -1,5 +1,5 @@
 {
-    "weightsPath": "./weights/yolov4-tiny-coco.weights",
+    "weightsPath": "./weights/yolov4-tiny-mask.weights",
     "showMasks": true,
     "showFPS": true,
     "showScores": true,
