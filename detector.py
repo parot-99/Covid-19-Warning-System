@@ -23,12 +23,19 @@ if __name__ == '__main__':
         type=str,
         help='image path, video path, or cam source',
     )
+
+    parser.add_argument(
+        '--tiny',
+        help='Set true to detect using YOLOv4-tiny',
+        default=False,
+        action='store_true'
+    )
         
     args = vars(parser.parse_args())
-    
+
     if args['system'] == 'mask':
         from yolo.yolo_mask import YoloMask
-        detector = YoloMask()
+        detector = YoloMask(args['tiny'])
         
     if args['system'] == 'distance':
         from yolo.yolo_social_distance import YoloSocialDistance
