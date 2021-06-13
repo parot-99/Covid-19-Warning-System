@@ -114,8 +114,11 @@ The new [mask-dataset] used to train the face mask detector.
   * [Face Mask Dataset (YOLO Format)]
   * [Face Mask Detection Dataset]
   * [WIDER FACE]
-  * [Google] Search Engine
-* [tensorflow-yolov4-tflite] for converting darknet wieghts to tensorflow pb.
+  * [Google]
+
+* Model
+  * [Darknet]
+  * [tensorflow-yolov4-tflite]
 
 ## Authors
 * [Ahmed Abdulkader]
@@ -142,3 +145,4 @@ The new [mask-dataset] used to train the face mask detector.
 [mask-dataset]: <https://drive.google.com/uc?export=download&id=1z4xdhhTcGHx3bDmbdc2dc-MffZKZSNdd>
 [Ahmed Abdulkader]: <https://github.com/parot-99>
 [M.Farok Mohammed]: <https://github.com/farok-amo>
+[Darknet]: <https://github.com/AlexeyAB/darknet>

@@ -3,7 +3,7 @@ __pycache__
 .pylint.d
 .vscode
 .gitattributes
-weights/*
 *.mp4
 *.jpg
-prediction.avi
+*.avi
+weights/*
