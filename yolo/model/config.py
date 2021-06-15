@@ -22,8 +22,8 @@ cfg.ANCHORS = anchors
 cfg.ANCHORS_TINY = anchors_tiny
 cfg.STRIDES = np.array([8, 16, 32])
 cfg.STRIDES_TINY = np.array([16, 32])
-cfg.XSCALE = np.array([1.2, 1.1, 1.05])
-cfg.XSCALE_TINY = np.array([1.05, 1.05])
+cfg.XYSCALE = np.array([1.2, 1.1, 1.05])
+cfg.XYSCALE_TINY = np.array([1.05, 1.05])
 cfg.ANCHOR_PER_SCALE = 3
 cfg.IOU_LOSS_THRESH = 0.45
 

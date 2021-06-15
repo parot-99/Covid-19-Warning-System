@@ -12,7 +12,6 @@ def cspdarknet53(input_layer):
     route = Conv(64, 1)(route)
     layers = Conv(64, 1)(layers)
     layers = Residual((32, 64), (1, 3))(layers)
-    test_layer = layers
     layers = Conv(64, 1)(layers)
     layers = tf.keras.layers.Concatenate(axis=-1)([layers, route])
 

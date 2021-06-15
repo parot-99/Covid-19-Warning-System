@@ -1,5 +1,5 @@
 {
-    "weightsPath": "./weights/yolov4-tiny-mask.weights",
+    "weightsPath": "./weights/yolov4-mask.weights",
     "showMasks": true,
     "showFPS": true,
     "showScores": true,
@@ -7,8 +7,8 @@
     "dontShow": false,
     "scoreThreshold": 0.3,
     "iouThreshold": 0.45,
-    "videoOutputPath": "./result.mp4",
-    "imageOutputPath": "./result.jpg",
+    "videoOutputPath": "./detections.mp4",
+    "imageOutputPath": "./detections.jpg",
     "socialDistanceFrame": "./test2_moment.jpg",
     "pedestrianHeight": 1.8,
     "socialDistance": 3,

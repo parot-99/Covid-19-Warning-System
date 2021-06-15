@@ -4,7 +4,7 @@ from .config import cfg
 
 
 def yolo_neck(cspdarknet_layers, classes):
-    rote_1, route_2, layers = cspdarknet_layers
+    route_1, route_2, layers = cspdarknet_layers
     # block 8
 
     route = layers

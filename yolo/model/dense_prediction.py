@@ -2,40 +2,43 @@ import tensorflow as tf
 from .config import cfg
 
 
-def decode(conv_output, output_size, classes, strides, anchors, xscale, i):
+def decode(conv_output, grid_size, classes, strides, anchors, xyscale, i):
     batch_size = tf.shape(conv_output)[0]
     conv_output = tf.keras.backend.reshape(
-        conv_output, (batch_size, output_size, output_size, 3, 5 + classes)
+        conv_output, (batch_size, grid_size, grid_size, 3, 5 + classes)
     )
 
-    conv_raw_dxdy, conv_raw_dwdh, conv_raw_conf, conv_raw_prob = tf.split(
+
+    bbox_xy, bbox_wh, detection_conf, classes_prob = tf.split(
         conv_output, (2, 2, 1, classes), axis=-1
     )
 
-    xy_grid = tf.meshgrid(tf.range(output_size), tf.range(output_size))
-    xy_grid = tf.keras.backend.expand_dims(tf.stack(xy_grid, axis=-1), axis=2)
-    xy_grid = tf.keras.backend.tile(
+    xy_grid = tf.meshgrid(tf.range(grid_size), tf.range(grid_size))
+    xy_grid = tf.expand_dims(tf.stack(xy_grid, axis=-1), axis=2)
+    xy_grid = tf.tile(
         tf.keras.backend.expand_dims(xy_grid, axis=0), [batch_size, 1, 1, 3, 1]
     )
+    xy_grid = tf.cast(xy_grid, tf.float32)
 
-    xy_grid = tf.keras.backend.cast(xy_grid, tf.float32)
-
-    pred_xy = (
-        (tf.keras.backend.sigmoid(conv_raw_dxdy) * xscale[i])
-        - 0.5 * (xscale[i] - 1)
+    bbox_xy_sigmoid = tf.sigmoid(bbox_xy)
+    detection_conf_sigmoid = tf.sigmoid(detection_conf)
+    classes_prob_sigmoid = tf.sigmoid(classes_prob)
+    
+    prediction_xy = (
+        (bbox_xy_sigmoid * xyscale[i])
+        - 0.5 * (xyscale[i] - 1)
         + xy_grid
     ) * strides[i]
-    pred_wh = tf.keras.backend.exp(conv_raw_dwdh) * anchors[i]
-    pred_xywh = tf.concat([pred_xy, pred_wh], axis=-1)
+    prediction_wh = tf.exp(bbox_wh) * anchors[i]
+     
+    prediction_xywh = tf.concat([prediction_xy, prediction_wh], axis=-1)
+    prediction_prob = detection_conf_sigmoid * classes_prob_sigmoid
 
-    pred_conf = tf.sigmoid(conv_raw_conf)
-    pred_prob = tf.sigmoid(conv_raw_prob)
+    prediction_xywh = tf.reshape(prediction_xywh, (batch_size, -1, 4))
+    prediction_prob = tf.reshape(prediction_prob, (batch_size, -1, classes))
 
-    pred_prob = pred_conf * pred_prob
-    pred_prob = tf.keras.backend.reshape(pred_prob, (batch_size, -1, classes))
-    pred_xywh = tf.keras.backend.reshape(pred_xywh, (batch_size, -1, 4))
 
-    return pred_xywh, pred_prob
+    return prediction_xywh, prediction_prob
 
 
 def filter_boxes(box_xywh, scores, input_shape, score_threshold=0.4):
@@ -86,7 +89,7 @@ def dense_prediction(feature_maps, classes, tiny=False):
                     classes,
                     cfg.STRIDES,
                     cfg.ANCHORS,
-                    cfg.XSCALE,
+                    cfg.XYSCALE,
                     i,
                 )
         
@@ -97,7 +100,7 @@ def dense_prediction(feature_maps, classes, tiny=False):
                     classes,
                     cfg.STRIDES,
                     cfg.ANCHORS,
-                    cfg.XSCALE,
+                    cfg.XYSCALE,
                     i,
                 )
         
@@ -108,7 +111,7 @@ def dense_prediction(feature_maps, classes, tiny=False):
                     classes,
                     cfg.STRIDES,
                     cfg.ANCHORS,
-                    cfg.XSCALE,
+                    cfg.XYSCALE,
                     i,
                 )
         
@@ -124,7 +127,7 @@ def dense_prediction(feature_maps, classes, tiny=False):
                     classes,
                     cfg.STRIDES_TINY,
                     cfg.ANCHORS_TINY,
-                    cfg.XSCALE_TINY,
+                    cfg.XYSCALE_TINY,
                     i,
                 )
                 
@@ -135,7 +138,7 @@ def dense_prediction(feature_maps, classes, tiny=False):
                     classes,
                     cfg.STRIDES_TINY,
                     cfg.ANCHORS_TINY,
-                    cfg.XSCALE_TINY,
+                    cfg.XYSCALE_TINY,
                     i,
                 )
             
