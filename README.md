@@ -85,12 +85,13 @@ Feel free to use Tensorflow 2.2-2.4
 ## TODO
 
 * [ ] Update documentation and readme
+* [ ] Implement a functionality that combines both mask and social distance violation detection
 * [x] Train yolov4-mask and add weights
 * [x] Social distancing detection
 * [x] Add yolov4-coco weights
 * [x] Add yolov4-tiny-coco weights
 * [x] Implement bird-eye view for social distancing detection
-* [ ] Build a simple GUI
+* [x] Build a simple GUI
 
 ## Dataset
 We collected images from multiple sources (mentioned in the Acknowledgements section), removed images that may lead to unwanted results, added new images for better results, and labeled all the images.

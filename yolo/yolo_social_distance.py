@@ -31,10 +31,9 @@ class YoloSocialDistance:
         print("[INFO]: Detector weights loaded")
         self.pedestrian_detector = model.get_graph()
 
+    def detect_from_image(self, image_path):
         self.__pixel_to_meter()
         self.__get_perspecive_points()
-
-    def detect_from_image(self, image_path):
         frame = cv2.imread(image_path)
 
         if frame is None:
@@ -54,6 +53,8 @@ class YoloSocialDistance:
                 cv2.destroyAllWindows()
 
     def detect_from_video(self, src=0):
+        self.__pixel_to_meter()
+        self.__get_perspecive_points()
         cap = cv2.VideoCapture(src, cv2.CAP_ANY)
         avg_fps = []
 
@@ -295,61 +296,41 @@ class YoloSocialDistance:
         )
 
     def __pixel_to_meter(self):
-        print("[INFO]: Calculating min social distance from image")
-        frame = cv2.imread(config["socialDistanceFrame"])
-        image_data = frame.copy()
-        image_data = cv2.cvtColor(image_data, cv2.COLOR_BGR2RGB)
-        image_data = cv2.resize(image_data, (416, 416))
-        image_data = image_data / 255.0
-        image_data = image_data.astype("float32")
-        image_data = np.expand_dims(image_data, axis=0)
-        image_data = tf.constant(image_data)
+        img = cv2.imread(config["socialDistanceFrame"])
+        drawing_img = img.copy()
 
-        prediction = self.pedestrian_detector(image_data)
+        self.__reference_obj_points = np.zeros((2, 2), np.int)
+        self.__counter = 0
 
-        boxes = prediction[0, :, 0:4]
-        pred_conf = prediction[0, :, 4:]
-        boxes = np.reshape(boxes, (1, boxes.shape[0], boxes.shape[1]))
-        pred_conf = np.reshape(
-            pred_conf, (1, pred_conf.shape[0], pred_conf.shape[1])
+        def draw_rectangle(event, x, y, flags, params):
+            if event == cv2.EVENT_LBUTTONDOWN:
+                self.__reference_obj_points[self.__counter] = x, y
+                cv2.circle(drawing_img, (x, y), 3, (0, 255, 0), 2)
+                self.__counter += 1
+
+        cv2.namedWindow("Choose bounding points for reference object", 0)
+        cv2.setMouseCallback(
+            "Choose bounding points for reference object", draw_rectangle
         )
 
-        (
-            boxes,
-            scores,
-            classes,
-            valid_detections,
-        ) = tf.image.combined_non_max_suppression(
-            boxes=tf.reshape(boxes, (tf.shape(boxes)[0], -1, 1, 4)),
-            scores=tf.reshape(
-                pred_conf,
-                (tf.shape(pred_conf)[0], -1, tf.shape(pred_conf)[-1]),
-            ),
-            max_output_size_per_class=1000,
-            max_total_size=1000,
-            iou_threshold=self.__iou_threshold,
-            score_threshold=self.__score_threshold,
-        )
+        while True:
+            cv2.imshow(
+                "Choose bounding points for reference object", drawing_img
+            )
+            key = cv2.waitKey(1)
 
-        bounding_boxes = [
-            boxes.numpy(),
-            scores.numpy(),
-            classes.numpy(),
-            valid_detections.numpy(),
-        ]
-
-        frame_height, frame_width, _ = frame.shape
-
-        for i in range(bounding_boxes[3][0]):
-            if bounding_boxes[2][0][i] == 0:
-                print("Found a person")
-                top = bounding_boxes[0][0][i][0] * frame_height
-                bottom = bounding_boxes[0][0][i][2] * frame_height
+            if self.__counter == 2:
+                top = self.__reference_obj_points[0][1]
+                bottom = self.__reference_obj_points[1][1]
                 scale = (bottom - top) / config["pedestrianHeight"]
                 self.__min_distance = scale * config["socialDistance"]
                 print(f"[INFO]: Min social distance: {self.__min_distance}")
+                cv2.destroyAllWindows()
+                break
 
-                return
+            if key == ord("q"):
+                cv2.destroyAllWindows()
+                break
 
     def __get_perspecive_points(self):
         img = cv2.imread(config["socialDistanceFrame"])
@@ -362,14 +343,16 @@ class YoloSocialDistance:
             def draw_rectangle(event, x, y, flags, params):
                 if event == cv2.EVENT_LBUTTONDOWN:
                     self.__circles[self.__counter] = x, y
-                    cv2.circle(drawing_img, (x, y), 3, (0, 255, 0), 5)
+                    cv2.circle(drawing_img, (x, y), 3, (0, 255, 0), 2)
                     self.__counter += 1
 
-            cv2.namedWindow("Frame", 0)
-            cv2.setMouseCallback("Frame", draw_rectangle)
+            cv2.namedWindow("Choose birds's-eye view 4 corners", 0)
+            cv2.setMouseCallback(
+                "Choose birds's-eye view 4 corners", draw_rectangle
+            )
 
             while True:
-                cv2.imshow("Frame", drawing_img)
+                cv2.imshow("Choose birds's-eye view 4 corners", drawing_img)
                 key = cv2.waitKey(1)
 
                 if self.__counter == 4:
@@ -410,13 +393,13 @@ class YoloSocialDistance:
                     )
                     pts = pts.reshape((-1, 1, 2))
                     cv2.polylines(drawing_img, [pts], True, (0, 255, 255))
-                    cv2.namedWindow("New image", 0)
-                    cv2.imshow("New image", warped)
-
-                if key == ord("q"):
+                    cv2.destroyAllWindows()
                     break
 
-            cv2.destroyAllWindows()
+                if key == ord("q"):
+                    cv2.destroyAllWindows()
+                    break
+
             print("[INFO]: Bird's eye view corner points:")
             print(f"[INFO]: Top left corner: {self.__circles[0]}")
             print(f"[INFO]: Top right corner: {self.__circles[1]}")
