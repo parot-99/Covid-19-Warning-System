@@ -34,8 +34,9 @@ from gui._general import (
     pause_detection,
     update_ref_obj_dim,
 )
-from gui._detect_mask import detect_mask, process_mask_frame
+from gui._detect_mask import detect_mask
 from gui._detect_distance import detect_distance
+from gui._detect_all import detect_all
 from gui._load_weights import load_mask_weights, load_distance_weights
 
 
@@ -1343,6 +1344,7 @@ class Ui_MainWindow(object):
         self.detectDistanceButton.clicked.connect(
             lambda: detect_distance(self)
         )
+        self.detectAllButton.clicked.connect(lambda: detect_all(self))
         self.pauseDetectionBtn.clicked.connect(lambda: pause_detection(self))
 
         # bird's-eye view config
@@ -1482,7 +1484,7 @@ class Ui_MainWindow(object):
                 '<html><head><meta name="qrichtext" content="1" /><style type="text/css">\n'
                 "p, li { white-space: pre-wrap; }\n"
                 "</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:12pt; font-weight:400; font-style:normal;\">\n"
-                '<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>',
+                '<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">1.5</p></body></html>',
             )
         )
         self.configureBirdsEye.setText(

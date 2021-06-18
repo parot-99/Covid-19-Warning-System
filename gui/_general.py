@@ -9,4 +9,4 @@ def pause_detection(self):
     self.detecting = 0
             
 def update_ref_obj_dim(self):
-    self.ref_obj_dim = self.refObjLoadText.toPlainText()
+    self.ref_obj_dim = float(self.refObjLoadText.toPlainText())

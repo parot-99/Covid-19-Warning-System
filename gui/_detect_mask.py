@@ -17,11 +17,11 @@ def process_mask_frame(self, src, class_names):
     image_data = cv2.cvtColor(image_data, cv2.COLOR_BGR2RGB)
     image_data = cv2.resize(image_data, (416, 416))
     image_data = image_data / 255.0
+    image_data = image_data.astype("float32")
     image_data = np.expand_dims(image_data, axis=0).astype("float32")
     image_data = tf.constant(image_data)
 
     prediction = self.mask_detector(image_data)
-
     boxes = prediction[0, :, 0:4]
     pred_conf = prediction[0, :, 4:]
     boxes = np.reshape(boxes, (1, boxes.shape[0], boxes.shape[1]))
@@ -86,7 +86,7 @@ def process_mask_frame(self, src, class_names):
             label = "mask"
             mask_count += 1
 
-        color = (0, 255, 255) if label == "no-mask" else (0, 255, 0)
+        color = (255, 0, 0) if label == "no-mask" else (0, 255, 0)
         score = int(score * 100)
 
         if label == "mask" and not self.show_mask:
@@ -122,6 +122,10 @@ def process_mask_frame(self, src, class_names):
 
 
 def detect_mask(self):
+    self.maskCountLabel.setText(f"Mask: {0}")
+    self.nomaskCountLabel.setText(f"No Mask: {0}")
+    self.distanceViolationLabel.setText(f"Social Distance Violations: {0}")
+    
     class_names = {0: "no-mask", 1: "mask"}
     print(f"[INFO]: Running inference from {self.source}")
 

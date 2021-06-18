@@ -1,6 +1,7 @@
 import numpy as np
 from gui._detect_mask import process_mask_frame
 from gui._detect_distance import process_distance_frame
+from gui._detect_all import process_all_frame
 
 def init_variables(self):
     self.source_list = ["Video", "Cam", "Image"]
@@ -23,4 +24,5 @@ def init_variables(self):
     self.detection_model = 'yolo'
     self.process_mask_frame = process_mask_frame
     self.process_distance_frame = process_distance_frame
+    self.process_all_frame = process_all_frame
     self.detecting = 0

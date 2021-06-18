@@ -20,6 +20,7 @@ def reload_obj_ref_img(self):
 def load_ref_obj_config_src(self):
     source_path = QFileDialog.getOpenFileName()[0]
     self.ref_obj_counter = 0
+    self.ref_obj_circles = np.zeros((2, 2), np.int)
 
     if source_path == "":
         return

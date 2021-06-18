@@ -44,7 +44,7 @@ def process_distance_frame(self, src, class_names):
             (tf.shape(pred_conf)[0], -1, tf.shape(pred_conf)[-1]),
         ),
         max_output_size_per_class=1000,
-        max_total_size=2000,
+        max_total_size=1000,
         iou_threshold=self.iou_threshold,
         score_threshold=self.score_threshold,
     )
@@ -207,6 +207,10 @@ def process_distance_frame(self, src, class_names):
 
 
 def detect_distance(self):
+    self.maskCountLabel.setText(f"Mask: {0}")
+    self.nomaskCountLabel.setText(f"No Mask: {0}")
+    self.distanceViolationLabel.setText(f"Social Distance Violations: {0}")
+    
     class_names = {0: "person"}
     print(f"[INFO]: Running inference from {self.source}")
 
