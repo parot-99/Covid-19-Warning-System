@@ -40,10 +40,10 @@ class Conv(tf.keras.layers.Layer):
             strides=self.strides,
             padding=self.padding,
             use_bias=not bn,
-            # kernel_regularizer=tf.keras.regularizers.L2(l2=0.005),
-            kernel_regularizer=tf.keras.regularizers.l2(0.0005),
-            kernel_initializer=tf.random_normal_initializer(stddev=0.01),
-            bias_initializer=tf.constant_initializer(0.0),
+            # kernel_regularizer=tf.keras.regularizers.l2(0.0005),
+            kernel_regularizer=tf.keras.regularizers.L2(l2=0.005),
+            kernel_initializer=tf.keras.initializers.RandomNormal(stddev=0.01),
+            bias_initializer=tf.keras.initializers.Constant(0.0)
         )
 
         if self.bn:

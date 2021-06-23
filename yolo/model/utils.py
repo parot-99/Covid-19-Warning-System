@@ -17,6 +17,8 @@ def parse_layers(model, conv_layers, residual_layers):
 
 
 def load_weights(model, weights_file, model_layers, output_layers):
+    flag = True
+
     with open(weights_file, "rb") as file:
         major, minor, revision, seen, _ = np.fromfile(
             file, dtype=np.int32, count=5
@@ -40,8 +42,9 @@ def load_weights(model, weights_file, model_layers, output_layers):
                 if layer.split("$")[1] == "2":
                     conv_layer = residual_layer.conv2
 
-                    if layer_name == "residual":
+                    if flag:
                         in_dim //= 2
+                        flag = False
 
             filters = conv_layer.conv.filters
             k_size = conv_layer.conv.kernel_size[0]
