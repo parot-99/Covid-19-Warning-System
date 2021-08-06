@@ -9,4 +9,4 @@ __pycache__
 weights/*
 !weights/.gitkeep
 test.py
-
+!gui-screenshot.JPG
