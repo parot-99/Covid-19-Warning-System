@@ -57,7 +57,7 @@ Feel free to use Tensorflow 2.2-2.4
 ## TODO
 
 * [ ] Update documentation and readme
-* [ ] Implement a functionality that combines both mask and social distance violation detection
+* [x] Implement a functionality that combines both mask and social distance violation detection
 * [x] Train yolov4-mask and add weights
 * [x] Social distancing detection
 * [x] Add yolov4-coco weights
