@@ -6,7 +6,7 @@ A deep learning based system that can:
 
 ## Assets
 
-* [Covid-19 Warning System Report]
+* [Covid-19 Warning System Research Report]
 * [Screenshots from the GUI]
 
 ## Weights
@@ -126,5 +126,5 @@ The new [mask-dataset] used to train the face mask detector.
 [Darknet]: <https://github.com/AlexeyAB/darknet>
 [Usage GUI]: <https://github.com/parot-99/Covid-19-Warning-System/tree/master/gui>
 [Usage CLI]: <https://github.com/parot-99/Covid-19-Warning-System/tree/master/yolo>
-[Covid-19 Warning System Report]: <https://github.com/parot-99/Covid-19-Warning-System/raw/master/assets/covid-19-warning-system.pdf>
+[Covid-19 Warning System Research Report]: <https://github.com/parot-99/Covid-19-Warning-System/raw/master/assets/covid-19-warning-system.pdf>
 [Screenshots from the GUI]: <https://github.com/parot-99/Covid-19-Warning-System/raw/master/assets/results.pdf>
