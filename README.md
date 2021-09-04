@@ -4,6 +4,10 @@ A deep learning based system that can:
 * Detect people not wearing face masks, mark them, and count the number of violations. 
 * Detect social distancing violations, mark them, and count the number of violations.
 
+## Assets
+
+* [Covid-19 Warning System Report] 
+
 ## Weights
 * [yolov4-mask] -> mask detection
 * [yolov4-tiny-mask] -> mask detection
@@ -121,3 +125,4 @@ The new [mask-dataset] used to train the face mask detector.
 [Darknet]: <https://github.com/AlexeyAB/darknet>
 [Usage GUI]: <https://github.com/parot-99/Covid-19-Warning-System/tree/master/gui>
 [Usage CLI]: <https://github.com/parot-99/Covid-19-Warning-System/tree/master/yolo>
+[Covid-19 Warning System Report]: <https://github.com/parot-99/Covid-19-Warning-System/raw/master/assets/covid-19-warning-system.pdf>
