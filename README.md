@@ -16,12 +16,12 @@ A deep learning based system that can:
 * [yolov4-tiny-coco] -> social distancing detection
 
 ## Prerequisites
- 1. Python 3.5–3.8
+ 1. Python 3.5–3.9
  2. pip 19.0 or later
    
 ## Note
 The requirements are updated acording to which version of tensorflow the repository was lately tested on.
-Feel free to use Tensorflow 2.2-2.4
+Feel free to use Tensorflow 2.2-2.6
 
 
 ## Installation

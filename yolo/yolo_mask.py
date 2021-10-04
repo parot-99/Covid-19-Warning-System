@@ -102,7 +102,10 @@ class YoloMask:
         image_data = np.expand_dims(image_data, axis=0)
         image_data = tf.constant(image_data)
 
+        # prev_time = time.time()
         prediction = self.mask_detector(image_data)
+        # fps = (1 / (time.time() - prev_time))
+        # print(fps)
 
         boxes = prediction[0, :, 0:4]
         pred_conf = prediction[0, :, 4:]

@@ -1,5 +1,5 @@
 {
-    "weightsPath": "./weights/yolov4-tiny-mask.weights",
+    "weightsPath": "./weights/yolov4-tiny-coco.weights",
     "showMasks": true,
     "showFPS": true,
     "showScores": true,
@@ -9,7 +9,7 @@
     "iouThreshold": 0.45,
     "videoOutputPath": "./detections.mp4",
     "imageOutputPath": "./detections.jpg",
-    "socialDistanceFrame": "./test2_moment.jpg",
+    "socialDistanceFrame": "./../../darknet/test-data/pedestrians_snap.jpg",
     "pedestrianHeight": 1.8,
     "socialDistance": 3,
     "birdEyeCoordinates": [

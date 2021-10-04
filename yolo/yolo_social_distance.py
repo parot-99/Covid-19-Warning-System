@@ -326,7 +326,6 @@ class YoloSocialDistance:
                 self.__min_distance = scale * config["socialDistance"]
                 print(f"[INFO]: Min social distance: {self.__min_distance}")
                 cv2.destroyAllWindows()
-                cv2.imwrite('./draw.png', drawing_img)
                 break
 
             if key == ord("q"):
