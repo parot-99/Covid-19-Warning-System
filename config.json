@@ -4,7 +4,7 @@
     "showFPS": true,
     "showScores": true,
     "writeDetection": false,
-    "dontShow": true,
+    "dontShow": false,
     "scoreThreshold": 0.3,
     "iouThreshold": 0.45,
     "videoOutputPath": "./detections.mp4",
@@ -12,11 +12,11 @@
     "socialDistanceFrame": "./../../darknet/test-data/pedestrians_snap.jpg",
     "pedestrianHeight": 1.8,
     "socialDistance": 3,
-    "dontShowMinDistance": 295,
+    "dontShowMinDistance": 0,
     "birdEyeCoordinates": [
-        [23, 11],
-        [1227, 25],
-        [39, 687],
-        [1202, 682]
+        [],
+        [],
+        [],
+        []
     ]
 }
