@@ -296,41 +296,48 @@ class YoloSocialDistance:
         )
 
     def __pixel_to_meter(self):
-        img = cv2.imread(config["socialDistanceFrame"])
-        drawing_img = img.copy()
+        if config["dontShowMinDistance"] == 0:
+            img = cv2.imread(config["socialDistanceFrame"])
+            drawing_img = img.copy()
 
-        self.__reference_obj_points = np.zeros((2, 2), np.int)
-        self.__counter = 0
+            self.__reference_obj_points = np.zeros((2, 2), np.int)
+            self.__counter = 0
 
-        def draw_rectangle(event, x, y, flags, params):
-            if event == cv2.EVENT_LBUTTONDOWN:
-                self.__reference_obj_points[self.__counter] = x, y
-                cv2.circle(drawing_img, (x, y), 3, (0, 255, 0), 2)
-                self.__counter += 1
+            def draw_rectangle(event, x, y, flags, params):
+                if event == cv2.EVENT_LBUTTONDOWN:
+                    self.__reference_obj_points[self.__counter] = x, y
+                    cv2.circle(drawing_img, (x, y), 3, (0, 255, 0), 2)
+                    self.__counter += 1
 
-        cv2.namedWindow("Choose bounding points for reference object", 0)
-        cv2.setMouseCallback(
-            "Choose bounding points for reference object", draw_rectangle
-        )
-
-        while True:
-            cv2.imshow(
-                "Choose bounding points for reference object", drawing_img
+            cv2.namedWindow("Choose bounding points for reference object", 0)
+            cv2.setMouseCallback(
+                "Choose bounding points for reference object", draw_rectangle
             )
-            key = cv2.waitKey(1)
 
-            if self.__counter == 2:
-                top = self.__reference_obj_points[0][1]
-                bottom = self.__reference_obj_points[1][1]
-                scale = (bottom - top) / config["pedestrianHeight"]
-                self.__min_distance = scale * config["socialDistance"]
-                print(f"[INFO]: Min social distance: {self.__min_distance}")
-                cv2.destroyAllWindows()
-                break
+            while True:
+                cv2.imshow(
+                    "Choose bounding points for reference object", drawing_img
+                )
+                key = cv2.waitKey(1)
 
-            if key == ord("q"):
-                cv2.destroyAllWindows()
-                break
+                if self.__counter == 2:
+                    top = self.__reference_obj_points[0][1]
+                    bottom = self.__reference_obj_points[1][1]
+                    scale = (bottom - top) / config["pedestrianHeight"]
+                    self.__min_distance = scale * config["socialDistance"]
+                    print(
+                        f"[INFO]: Min social distance: {self.__min_distance}"
+                    )
+                    cv2.destroyAllWindows()
+                    break
+
+                if key == ord("q"):
+                    cv2.destroyAllWindows()
+                    break
+
+        else:
+            self.__min_distance = config["dontShowMinDistance"]
+            
 
     def __get_perspecive_points(self):
         img = cv2.imread(config["socialDistanceFrame"])

@@ -11,6 +11,8 @@ def process_mask_frame(self, src, class_names):
     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     width = self.outputFrame.frameGeometry().width() - 50
     height = self.outputFrame.frameGeometry().height() - 50
+    width = 416
+    height = 416
     frame = cv2.resize(frame, (width, height))
 
     image_data = src.copy()
